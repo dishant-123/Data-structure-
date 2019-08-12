@@ -5,11 +5,11 @@ struct node
 	struct node *next;
 };
 struct node *root=NULL;
-void print(struct node * root1)
+void print()
 {
 	struct node *iterate=NULL;
-	iterate=root1;
-	if(root1==NULL)
+	iterate=root;
+	if(root==NULL)
 		printf("Empty List");
 	else
 	{
@@ -38,7 +38,7 @@ void add(struct node * temp)
 		temp1->next=temp;
 	}
 	
-	//print(root);
+	//print();
 }
 struct node *root;
 int length()
@@ -54,29 +54,31 @@ int length()
 	//printf("%d \n",c);
 	return c;
 }
-void split()
+void add_before(int p,struct node * value)//different stack frame for all function.
 {
-	int c=0;
-	struct node *i=NULL;
-	struct node *j=NULL;
 	struct node *temp=NULL;
-	struct node *start=root;
-	struct node *end=NULL;
-	i=root;
-	j=root;
-	while((j->next!=NULL && j!=NULL) && ((j->next->next!=NULL && j!=NULL)))
+	temp=root;
+	int c=0,p1=0;
+	if(root=NULL)
 	{
-		j=j->next->next;
-		i=i->next;
-		c++;
+		printf("No element in list.\n");
 	}
-	end=i->next;
-	temp=i;
-	temp->next=NULL;
-	print(start);
-	printf("\n");
-	print(end);
-	
+	else if(p==1)
+	{
+		value->next=root;
+		root=value;
+	}
+	else
+	{
+		while(c<p-1)
+		{
+			c++;
+			temp=temp->next;
+			p1=1;
+		}
+		value->next=temp->next;
+		temp->next=value;
+	}
 }
 int main()
 
@@ -92,9 +94,11 @@ int main()
 		scanf("%d",&temp->data);
 		temp->next=NULL;
 		add(temp);
-		//printf("%d %d \n",temp,&temp);
 	}
-	//print(root);
-	//printf("\n");
-	split();
+	struct node *value=NULL;
+	value=(struct node *)malloc(sizeof(struct node));
+	value->next=NULL;
+	value->data=9;
+	add_before(4,value);
 }
+

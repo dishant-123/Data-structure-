@@ -40,7 +40,6 @@ void add(struct node * temp)
 	
 	//print(root);
 }
-struct node *root;
 int length()
 {
 	int c=0;
@@ -54,34 +53,24 @@ int length()
 	//printf("%d \n",c);
 	return c;
 }
-void delete1(int p)
+void remove_dupt()
 {
-	int i=1;
 	struct node *temp=NULL;
-	struct node *temp1=NULL;
 	temp=root;
-	if(p>length())
+	while(temp->next!=NULL)
 	{
-		printf("Position out of range \n");
-	}
-	else if(p==1)
-	{
-		root=temp->next;
-		
-	}
-	else
-	{
-		while(i<p-1)
+		if((temp->next)->data==(temp)->data)
+		{
+			temp->next=temp->next->next;
+		}
+		else
 		{
 			temp=temp->next;
-			i++;
 		}
-		//printf("%d \n",temp->next->data);
-		temp->next=temp->next->next;
 	}
 	
 }
-int main()
+int main() 
 {
 	int n,i;
 	struct node *temp=NULL;
@@ -94,11 +83,7 @@ int main()
 		scanf("%d",&temp->data);
 		temp->next=NULL;
 		add(temp);
-		//printf("%d %d \n",temp,&temp);
 	}
-	int p;
-	printf("Enter the position you want to delete \n");
-	scanf("%d",&p);
-	delete1(p);
+	remove_dupt();
 	print(root);
 }
