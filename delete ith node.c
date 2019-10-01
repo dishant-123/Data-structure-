@@ -40,6 +40,7 @@ void add(struct node * temp)
 	
 	//print(root);
 }
+struct node *root;
 int length()
 {
 	int c=0;
@@ -53,60 +54,51 @@ int length()
 	//printf("%d \n",c);
 	return c;
 }
-void remove_dupt()
+void delete1(int p)
 {
+	int i=1;
 	struct node *temp=NULL;
+	struct node *temp1=NULL;
 	temp=root;
-	while(temp->next!=NULL)
+	if(p>length())
 	{
-		if((temp->next)->data==(temp)->data)
-		{
-			temp->next=temp->next->next;
-		}
-		else
+		printf("Position out of range \n");
+	}
+	else if(p==1)
+	{
+		root=temp->next;
+		
+	}
+	else
+	{
+		while(i<p-1)
 		{
 			temp=temp->next;
+			i++;
 		}
+		//printf("%d \n",temp->next->data);
+		temp->next=temp->next->next;
 	}
 	
 }
-int main() 
+int main()
 {
 	int n,i;
-	
+	struct node *temp=NULL;
 	printf("Enter the length of linked list \n");
 	scanf("%d",&n);
 	for(i=0;i<n;i++)
 	{
-		struct node *temp=(struct node *)malloc(sizeof(struct node));
+		temp=(struct node *)malloc(sizeof(struct node));
 		printf("Enter %d element \n",i+1);
 		scanf("%d",&temp->data);
 		temp->next=NULL;
 		add(temp);
+		//printf("%d %d \n",temp,&temp);
 	}
-	struct node *top=( struct node*)malloc(sizeof(struct node));
-    top->data=-999;
-    top->next=root;
-    root=top;
-    struct node *iterate=root;
-    while(iterate->next!=NULL)
-    {
-        if(iterate->next->data>3)
-        {
-            struct node *i=iterate->next;
-            while(i->next)
-            {
-                i=i->next;
-            }
-            
-            //i->next=iterate->next;
-            iterate->next=iterate->next->next;
-            //i->next->next=NULL;
-            
-            
-        }
-        else
-            iterate=iterate->next;
-    }
-	print(root->next);
+	int p;
+	printf("Enter the position you want to delete \n");
+	scanf("%d",&p);
+	delete1(p);
+	print(root);
 }

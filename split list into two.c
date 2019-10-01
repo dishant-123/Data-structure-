@@ -40,6 +40,7 @@ void add(struct node * temp)
 	
 	//print(root);
 }
+struct node *root;
 int length()
 {
 	int c=0;
@@ -53,60 +54,48 @@ int length()
 	//printf("%d \n",c);
 	return c;
 }
-void remove_dupt()
+void split()
 {
+	int c=0;
+	
+	struct node *i=NULL;
+	struct node *j=NULL;
 	struct node *temp=NULL;
-	temp=root;
-	while(temp->next!=NULL)
+	struct node *start=root;
+	struct node *end=NULL;
+	i=root;
+	j=root;
+	while((j->next!=NULL && j!=NULL) && ((j->next->next!=NULL && j!=NULL)))
 	{
-		if((temp->next)->data==(temp)->data)
-		{
-			temp->next=temp->next->next;
-		}
-		else
-		{
-			temp=temp->next;
-		}
+		j=j->next->next;
+		end=i;
+		i=i->next;
+		c++;
 	}
+	//end=i->next;
+	i->next=NULL;
+	print(start);
+	printf("\n");
+	print(end);
 	
 }
-int main() 
+int main()
+
 {
 	int n,i;
-	
+	struct node *temp=NULL;
 	printf("Enter the length of linked list \n");
 	scanf("%d",&n);
 	for(i=0;i<n;i++)
 	{
-		struct node *temp=(struct node *)malloc(sizeof(struct node));
+		temp=(struct node *)malloc(sizeof(struct node));
 		printf("Enter %d element \n",i+1);
 		scanf("%d",&temp->data);
 		temp->next=NULL;
 		add(temp);
+		//printf("%d %d \n",temp,&temp);
 	}
-	struct node *top=( struct node*)malloc(sizeof(struct node));
-    top->data=-999;
-    top->next=root;
-    root=top;
-    struct node *iterate=root;
-    while(iterate->next!=NULL)
-    {
-        if(iterate->next->data>3)
-        {
-            struct node *i=iterate->next;
-            while(i->next)
-            {
-                i=i->next;
-            }
-            
-            //i->next=iterate->next;
-            iterate->next=iterate->next->next;
-            //i->next->next=NULL;
-            
-            
-        }
-        else
-            iterate=iterate->next;
-    }
-	print(root->next);
+	//print(root);
+	//printf("\n");
+	split();
 }

@@ -1,3 +1,10 @@
+/*geeks for geeks
+Delete N nodes after M nodes of a linked list
+M = 2, N = 2
+Linked List: 1->2->3->4->5->6->7->8
+Output:
+Linked List: 1->2->5->6
+*/
 #include<stdio.h>
 struct node
 {
@@ -40,6 +47,7 @@ void add(struct node * temp)
 	
 	//print(root);
 }
+struct node *root;
 int length()
 {
 	int c=0;
@@ -53,60 +61,46 @@ int length()
 	//printf("%d \n",c);
 	return c;
 }
-void remove_dupt()
+void deletemn(int m,int n)
 {
-	struct node *temp=NULL;
-	temp=root;
-	while(temp->next!=NULL)
+	struct node *temp=root;
+	int countm=0,countn=0;
+	while(temp)
 	{
-		if((temp->next)->data==(temp)->data)
+		countm=0,countn=0;
+		while(countm<m-1 && temp)
 		{
+			countm++;
+			temp=temp->next;
+			
+		}
+		if(temp==NULL || temp->next==NULL)
+		break;
+		while(countn<n && temp->next)
+		{
+			countn++;
 			temp->next=temp->next->next;
 		}
-		else
-		{
-			temp=temp->next;
-		}
+		temp=temp->next;
 	}
-	
 }
-int main() 
+int main()
+
 {
 	int n,i;
-	
+	struct node *temp=NULL;
 	printf("Enter the length of linked list \n");
 	scanf("%d",&n);
 	for(i=0;i<n;i++)
 	{
-		struct node *temp=(struct node *)malloc(sizeof(struct node));
+		temp=(struct node *)malloc(sizeof(struct node));
 		printf("Enter %d element \n",i+1);
 		scanf("%d",&temp->data);
 		temp->next=NULL;
 		add(temp);
+		//printf("%d %d \n",temp,&temp);
 	}
-	struct node *top=( struct node*)malloc(sizeof(struct node));
-    top->data=-999;
-    top->next=root;
-    root=top;
-    struct node *iterate=root;
-    while(iterate->next!=NULL)
-    {
-        if(iterate->next->data>3)
-        {
-            struct node *i=iterate->next;
-            while(i->next)
-            {
-                i=i->next;
-            }
-            
-            //i->next=iterate->next;
-            iterate->next=iterate->next->next;
-            //i->next->next=NULL;
-            
-            
-        }
-        else
-            iterate=iterate->next;
-    }
-	print(root->next);
+	//printf("\n");
+	deletemn(3,2);
+	print(root);
 }
