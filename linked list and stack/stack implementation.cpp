@@ -35,7 +35,7 @@ void pop(struct stack **root)
 		printf("no element in stack \n");
 	else
 	{
-		(*root)=(*root)->next;
+		*root=(*root)->next;
 	}
 }
 
